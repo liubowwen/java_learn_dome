@@ -1,30 +1,29 @@
 package com.lbw.kafka;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Properties;
+
+import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.apache.kafka.clients.producer.ProducerConfig;
+import org.apache.kafka.common.serialization.StringSerializer;
 
 
 public class Consumer {
     public static void main(String[] args) {
-        Properties properties = new Properties();
+
         Properties props = new Properties();
-        props.put("bootstrap.servers", "broker1:9092, broker2:9092");
-// group.id，指定了消费者所属群组
-        props.put("group.id", "CountryCounter");
-        props.put("key.deserializer", "org.apache.kafka.common.serializaiton.StrignDeserializer");
-        props.put("value.deserializer", "org.apache.kafka.common.serializaiton.StrignDeserializer");
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,"10.200.0.102:9092");
 
-        KafkaConsumer<String, String> consumer =
-                new KafkaConsumer<String, String>(props);
+        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
 
 
-
-        KafkaConsumer<String, String> kafkaConsumer = new KafkaConsumer<String, String>(properties);
-        kafkaConsumer.subscribe(Arrays.asList("duanjt_test"));// 订阅消息
-
+        KafkaConsumer<String, String> kafkaConsumer = new KafkaConsumer<String, String>(props);
+        kafkaConsumer.subscribe(Collections.singletonList("sun"));// 订阅消息
         while (true) {
             ConsumerRecords<String, String> records = kafkaConsumer.poll(100);
             for (ConsumerRecord<String, String> record : records) {

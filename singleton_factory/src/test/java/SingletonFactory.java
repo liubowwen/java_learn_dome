@@ -25,7 +25,7 @@ public class SingletonFactory {
          long pool=0;
          long notPool=0;
         SingletonFactory singletonFactory=new SingletonFactory();
-        for (int i = 0; i <12345; i++) {
+        for (int i = 0; i <10; i++) {
 
             long timeMillis = System.currentTimeMillis();
             singletonFactory.thread();
