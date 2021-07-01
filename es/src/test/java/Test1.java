@@ -14,15 +14,10 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
-import org.elasticsearch.client.security.user.User;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.index.reindex.BulkByScrollResponse;
-import org.elasticsearch.index.reindex.DeleteByQueryAction;
 import org.elasticsearch.index.reindex.DeleteByQueryRequest;
-import org.elasticsearch.index.reindex.DeleteByQueryRequestBuilder;
 import org.elasticsearch.search.SearchHit;
-import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.junit.Test;
 
@@ -50,7 +45,7 @@ public class Test1 {
     /**
      * 测试存储 插入一条数据
      */
-    @Test
+
     public void testIndexData() throws IOException {
 
         IndexRequest indexRequest = new IndexRequest("test");
@@ -72,12 +67,12 @@ public class Test1 {
      * 查找一条数据
      * @throws IOException
      */
-    @Test
+
     public void testSearch() throws IOException {
         SearchRequest searchRequest = new SearchRequest();
         searchRequest.indices("test");
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-//        searchSourceBuilder.query(QueryBuilders.existsQuery("刘博文"));
+        //searchSourceBuilder.query(QueryBuilders.existsQuery("刘博文"));
         searchRequest.source(searchSourceBuilder);
         SearchResponse search = client.search(searchRequest, RequestOptions.DEFAULT);
         Arrays.toString(search.getHits().getHits());
@@ -88,7 +83,7 @@ public class Test1 {
             System.out.println(user);
         }
     }
-    @Test
+
     public  void delete() throws IOException {
         DeleteByQueryRequest deleteByQueryRequest=new DeleteByQueryRequest("test");
         deleteByQueryRequest.setQuery(QueryBuilders.termQuery("age","121"));

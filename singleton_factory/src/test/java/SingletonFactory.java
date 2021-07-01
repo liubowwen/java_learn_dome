@@ -14,7 +14,7 @@ public class SingletonFactory {
     /**
      * 线程池
      */
-    @Test
+
     public  void t1() throws InterruptedException {
         thread();
 
