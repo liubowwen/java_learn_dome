@@ -314,7 +314,7 @@ public class JdTest {
 
     public static void main(String[] args) throws Exception {
         JdTest jdTest = new JdTest();
-        jdTest.buyProduct("10027547726663");
+        jdTest.buyProduct("100010793473");
 //        String json="{\"operations\":[{\"TheSkus\":[{\"Id\":\"23274670145\",\"num\":3,\"skuUuid\":\"F2h4dQ964979953801908224\",\"useUuid\":false}]}],\"serInfo\":{\"area\":\"13_1042_3528_59596\",\"user-key\":\"b002f4ad-bc6e-486f-afde-7eb462497fe3\"}}";
 //        System.out.println(json);
 
