@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/jd_buy/jd_buy.iml" filepath="$PROJECT_DIR$/jd_buy/jd_buy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sping_boot_test/sping_boot_test.iml" filepath="$PROJECT_DIR$/sping_boot_test/sping_boot_test.iml" />
+    </modules>
+  </component>
+</project>

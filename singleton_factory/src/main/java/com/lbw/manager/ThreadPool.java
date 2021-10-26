@@ -13,7 +13,7 @@ public class ThreadPool {
     private static int corePoolSize = 5;
 
     // 最大可创建的线程数
-    private static int maxPoolSize = 1000;
+    private static int maxPoolSize = 10;
 
     // 队列最大长度
     private  static int queueCapacity = 3000;

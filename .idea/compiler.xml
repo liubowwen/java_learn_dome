@@ -12,5 +12,9 @@
         <module name="kafka" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="jd_buy" target="8" />
+      <module name="sping_boot_test" target="8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
