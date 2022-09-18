@@ -7,14 +7,31 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="singleton_factory" />
-        <module name="es" />
+        <module name="nat" />
+        <module name="rockect_mq" />
+        <module name="rockect_mq_consumer" />
+        <module name="common" />
         <module name="kafka" />
+        <module name="singleton_factory" />
+        <module name="sping_boot_test" />
+        <module name="spring_cloud_service2" />
+        <module name="spring_cloud_service1" />
+        <module name="es" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="jd_buy" target="8" />
-      <module name="sping_boot_test" target="8" />
+      <module name="log_test" target="1.5" />
+      <module name="test" target="1.8" />
     </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="nat" options="-parameters" />
+      <module name="rockect_mq" options="-parameters" />
+      <module name="rockect_mq_consumer" options="-parameters" />
+      <module name="sping_boot_test" options="-parameters" />
+      <module name="spring_cloud_service1" options="-parameters" />
+      <module name="spring_cloud_service2" options="-parameters" />
+    </option>
   </component>
 </project>

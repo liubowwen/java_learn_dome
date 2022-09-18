@@ -1,0 +1,7 @@
+server:
+  port: 8082
+
+rocketmq:
+  name-server: wylbw.vip:9876
+  producer:
+    group: my-producer-group

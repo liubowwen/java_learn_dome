@@ -16,6 +16,12 @@
         <module>singleton_factory</module>
         <module>kafka</module>
         <module>es</module>
+        <module>spring_cloud_service1</module>
+        <module>spring_cloud_service2</module>
+        <module>common</module>
+        <module>nat</module>
+        <module>rockect_mq</module>
+        <module>rockect_mq_consumer</module>
     </modules>
     <build>
         <plugins>
@@ -29,7 +35,7 @@
                     <archive>
                         <manifest>
                             <!-- 此处指定main方法入口的class -->
-                            <mainClass>com.lbw.es.JdTest</mainClass>
+                            <mainClass>com.com.lbw.jd.servcie.Exploit</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

@@ -7,7 +7,7 @@ import java.util.Scanner;
 import java.util.UUID;
 
 /**
- * @author ：lbw
+ * @author ：com.lbw
  * @date ：Created in 2021/8/31 9:53
  * @description：TODO
  */

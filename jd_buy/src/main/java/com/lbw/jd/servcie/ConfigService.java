@@ -6,18 +6,19 @@ import java.io.IOException;
 import java.util.Properties;
 
 /**
- * @author ：lbw
+ * @author ：com.lbw
  * @date ：Created in 2021/8/1 16:10
  * @description：TODO
  */
 public class ConfigService {
+
     private static final Properties PROPERTIES = new Properties();
 
     static {
         // 使用InPutStream流读取properties文件
         BufferedReader bufferedReader = null;
         try {
-            bufferedReader = new BufferedReader(new FileReader("./application.properties"));
+            bufferedReader = new BufferedReader(new FileReader("application.properties"));
             PROPERTIES.load(bufferedReader);
         } catch (IOException e) {
             e.printStackTrace();
@@ -31,6 +32,10 @@ public class ConfigService {
         }
 
     }
+
+
+
+
 
     public static String getProperties(String key) throws Exception {
         if (PROPERTIES == null) {

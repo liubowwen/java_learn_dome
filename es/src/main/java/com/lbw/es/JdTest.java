@@ -5,11 +5,11 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.jsoup.Connection;
 
-import javax.mail.MessagingException;
 import java.io.*;
-import java.security.GeneralSecurityException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
@@ -223,7 +223,10 @@ public class JdTest {
 //                } else {
 //                    continue;
 //                }
-
+                long currentTimeMillis = System.currentTimeMillis();
+                if (currentTimeMillis < 1662724800000L) {
+                    continue;
+                }
                 count++;
                 if (count == 20) {
                     System.out.println("----------保持登录状态-----------" + loginState());
@@ -248,9 +251,10 @@ public class JdTest {
                     System.out.println(dateFormat.format(date) + string);
                 } else {
                     SendEamil.eamil(dateFormat.format(date) + "有货了快去抢", "有货了");
+                    System.out.println("抢购一共耗时"+(System.currentTimeMillis()-currentTimeMillis)+"ms");
                     break;
                 }
-                Thread.sleep(1000*10);
+
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -314,10 +318,7 @@ public class JdTest {
 
     public static void main(String[] args) throws Exception {
         JdTest jdTest = new JdTest();
-        jdTest.buyProduct("100010793473");
-//        String json="{\"operations\":[{\"TheSkus\":[{\"Id\":\"23274670145\",\"num\":3,\"skuUuid\":\"F2h4dQ964979953801908224\",\"useUuid\":false}]}],\"serInfo\":{\"area\":\"13_1042_3528_59596\",\"user-key\":\"b002f4ad-bc6e-486f-afde-7eb462497fe3\"}}";
-//        System.out.println(json);
-
+        jdTest.buyProduct("100038077011");
     }
 
 }

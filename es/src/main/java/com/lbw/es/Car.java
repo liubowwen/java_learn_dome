@@ -71,52 +71,6 @@ public class Car {
     }
 
 
-    public static void main(String[] args) throws InterruptedException {
 
-        Car car=new Car();
-        car.lock();
-        AtomicReference<Thread> cas = car.getCas();
-        Thread thread = cas.get();
-        System.out.println(thread);
-        new Thread(() -> {
-            Car car1=new Car();
-            car.lock();
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            AtomicReference<Thread> cas1 = car.getCas();
-            Thread thread1 = cas1.get();
-            System.out.println(thread1);
-            car.unlock();
-            thread1 = cas1.get();
-            System.out.println(thread1);
-        }).start();
-        Thread.sleep(100);
-        car.unlock();
-        thread = cas.get();
-        System.out.println("主线程 "+thread);
-//        HashMap<Integer,Integer> map=new HashMap();
-//        for (int j = 0; j < 1000; j++) {
-//            Car car = new Car();
-//            for (int i = 0; i < 1000; i++) {
-//                new Thread(() -> car.update()).start();
-//            }
-//            Thread.sleep(5);
-//            if (map.containsKey(car.a))
-//            {
-//                Integer o = map.get(car.a);
-//                o=o+1;
-//                map.put(car.a,o);
-//            }else {
-//                map.put(car.a,1);
-//            }
-//
-//        }
-//        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-//            System.out.println(entry.getKey()+" : " + entry.getValue());
-//        }
-    }
 
 }

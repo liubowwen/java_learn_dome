@@ -3,13 +3,13 @@ package com.lbw.jd.servcie;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.lbw.jd.Thread.RunnableFactory;
-import com.lbw.manager.ThreadPoolManager;
 import org.jsoup.Connection;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
@@ -26,17 +26,22 @@ public class JdTest {
     private String productId;
     private String proxyUrl;
     private String proxyIp;
+    private Long date;
 
 
     private void init() throws Exception {
 
         this.email = ConfigService.getProperties("email");
         this.productId = ConfigService.getProperties("productId");
+        this.date = Long.valueOf(ConfigService.getProperties("date"));
         if (email == null || "".equals(email)) {
             throw new Exception("邮箱未填写");
         }
         if (productId == null || "".equals(productId)) {
             throw new Exception("商品ID未填写");
+        }
+        if (date == null ) {
+            throw new Exception("抢购日期未填写");
         }
         String newProxyIp = getProxyUrl();
         if (newProxyIp == null) {
@@ -50,14 +55,15 @@ public class JdTest {
     }
 
     private String getProxyUrl() throws Exception {
-        String ip = IpPool.getIpPool().getIp();
-        if (ip == null) {
-            return null;
-        }
-        proxyIp = ip;
-        System.out.println("切换可用Ip:" + ip);
-        ip = "http://" + ip + "?proxyUrl=";
-        return ip;
+        return "";
+//        String ip = IpPool.getIpPool().getIp();
+//        if (ip == null) {
+//            return null;
+//        }
+//        proxyIp = ip;
+//        System.out.println("切换可用Ip:" + ip);
+//        ip = "http://" + ip + "?proxyUrl=";
+//        return ip;
     }
 
     public JdTest() throws Exception {
@@ -258,24 +264,20 @@ public class JdTest {
                     System.out.println("----------保持登录状态-----------" + loginState());
                     count = 0;
                 }
+                long currentTimeMillis = System.currentTimeMillis();
+                if (currentTimeMillis < date) {
+                    continue;
+                }
                 JSONObject jsonObject = getProductInfo(productId);
                 String string = null;
                 try {
                     string = jsonObject.getJSONObject("stockInfo").getString("stockDesc");
                 } catch (Exception e) {
                     if (string == null) {
-                        //传入被限制的ip
-                        IpPool.getIpPool().disableIp(proxyIp);
-                        //切换可用Ip
-                        String newProxyIp = getProxyUrl();
-                        if (newProxyIp == null) {
-                            IpPool.getIpPool().getIp();
-                            System.out.println("IP池用完等待1分钟");
-                            Thread.sleep(1000 * 60);
-                            continue;
-                        }
-                        proxyUrl = newProxyIp;
 
+                        Thread.sleep(1000 * 60);
+                        proxyUrl = "";
+                        continue;
                     }
                     Thread.sleep(1000 * 10);
                     continue;
@@ -285,13 +287,9 @@ public class JdTest {
                 if (string.contains("无货")) {
                     System.out.println(dateFormat.format(date) + string);
                 } else {
-                    System.out.println(string);
-                    SendEamil sendEamil = new SendEamil(email, dateFormat.format(date) + "有货了快去抢", "有货了");
-                    Runnable runnable = RunnableFactory.sendEmail(sendEamil);
-                    ThreadPoolManager.getMe().executor(runnable);
                     break;
                 }
-                Thread.sleep(1000*10);
+                Thread.sleep(100);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -305,7 +303,7 @@ public class JdTest {
         String url = proxyUrl + "https://item-soa.jd.com/getWareBusiness?callback=jQuery7266683&skuId=" + productId;
         String s = RequestUtil.request(url, Connection.Method.GET).body();
         String substring = s.replace("jQuery7266683(", "");
-         substring = substring.replace(")", "");
+        substring = substring.replace(")", "");
         return JSON.parseObject(substring);
     }
 
